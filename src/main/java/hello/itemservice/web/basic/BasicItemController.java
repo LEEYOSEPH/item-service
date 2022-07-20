@@ -83,6 +83,15 @@ public class BasicItemController {
         return "basic/item";
     }
 
+    /**
+     * PRG - Post/Redirect/Get
+     */
+    @PostMapping("/add")
+    public String addItemV5(Item item) {
+        itemRepository.save(item);
+        return "redirect:/basic/items/" + item.getId();
+    }
+
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
@@ -95,6 +104,8 @@ public class BasicItemController {
         itemRepository.update(itemId, item);
         return "redirect:/basic/items/{itemId}";
     }
+
+
 
     /**
      * 테스트용 데이터 추가
